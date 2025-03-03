@@ -136,7 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['success_message'] = "Mindestbestellwert und Lieferkosten müssen positive Werte sein.";
             $_SESSION['message_type'] = "error";
         } else {
-            // Ermitteln der neuen Zone-ID: höchster zonen_id + 1
             $sqlMaxId = "SELECT MAX(zonen_id) AS max_id FROM zonen";
             $resultMax = $conn->query($sqlMaxId);
             $rowMax = $resultMax->fetch_assoc();

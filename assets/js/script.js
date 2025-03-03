@@ -71,20 +71,16 @@ function toggleMenu() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  let successDiv = document.querySelector(".success-message");
-  if (successDiv && successDiv.innerHTML.trim() !== "") {
-    // Stelle sicher, dass die Opazität 1 ist
-    successDiv.style.opacity = "1";
+$(document).ready(function(){
+  setTimeout(function(){
+      $('.success-message').fadeOut('slow');
+  }, 3000);
+});
 
-    setTimeout(() => {
-      successDiv.style.opacity = "0"; // fade out
-
-      setTimeout(() => {
-        successDiv.style.display = "none"; // komplett entfernen
-      }, 500); // Warte auf die Transition (0.5s)
-    }, 3000); // Nach 3 Sekunden starten
-  }
+$(document).ready(function(){
+  setTimeout(function(){
+      $('.error-message').fadeOut('slow');
+  }, 3000);
 });
 
 function openEditForm(product) {
