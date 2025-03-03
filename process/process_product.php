@@ -1,6 +1,9 @@
 <?php
 // process_product.php
 session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require_once 'inc/dbverb.php';
 require_once 'inc/functions.php';
 
@@ -9,13 +12,6 @@ require_once 'inc/functions.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
     $delete_id = filter_var($_POST['delete_id'], FILTER_VALIDATE_INT);
     if ($delete_id !== false) {
-        // Lösche zuerst die zugehörigen Zutaten
-        $deleteZutaten = $conn->prepare("DELETE FROM produkt_zutaten WHERE produkt_id = ?");
-        if ($deleteZutaten) {
-            $deleteZutaten->bind_param("i", $delete_id);
-            $deleteZutaten->execute();
-            $deleteZutaten->close();
-        }
         // Lösche das Produkt
         $stmt = $conn->prepare("DELETE FROM produkte WHERE id = ?");
         if ($stmt) {
@@ -32,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
     } else {
         $_SESSION['success_message'] = "Ungültige Produkt-ID.";
     }
-    header("Location: mainDashboard.php");
+    header("Location: ../mainDashboard.php");
     exit();
 }
 
@@ -50,19 +46,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Wenn ein neues Bild hochgeladen wurde, verarbeite es
         if (!empty($_FILES['bild']['name'])) {
-            $targetDir = "uploads/";
+            $targetDir = "../uploads/";
             $bild = basename($_FILES['bild']['name']);
             $targetFile = $targetDir . $bild;
             $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
             if (!in_array($fileType, ["jpg", "jpeg", "png"])) {
                 $_SESSION['success_message'] = "Nur JPG, JPEG und PNG Dateien sind erlaubt.";
-                header("Location: mainDashboard.php");
+                header("Location: ../mainDashboard.php");
                 exit();
             }
             if (!move_uploaded_file($_FILES["bild"]["tmp_name"], $targetFile)) {
                 $_SESSION['success_message'] = "Fehler beim Hochladen des Bildes.";
-                header("Location: mainDashboard.php");
+                header("Location: ../mainDashboard.php");
                 exit();
             }
             $stmt = $conn->prepare("UPDATE produkte SET name=?, preis=?, bild=?, kategorie=?, produktbeschreibung=?, allergien=? WHERE id=?");
@@ -79,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION['success_message'] = "Fehler beim Aktualisieren: " . $stmt->error;
         }
         $stmt->close();
-        header("Location: mainDashboard.php");
+        header("Location: ../mainDashboard.php");
         exit();
     } else {
         // PRODUKT HINZUFÜGEN (Insert)
@@ -99,12 +95,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             if (!in_array($fileType, ["jpg", "jpeg", "png"])) {
                 $_SESSION['success_message'] = "Nur JPG, JPEG und PNG Dateien sind erlaubt.";
-                header("Location: products.php");
+                header("Location: ../products.php");
                 exit();
             }
             if (!move_uploaded_file($_FILES["bild"]["tmp_name"], $targetFile)) {
                 $_SESSION['success_message'] = "Fehler beim Hochladen des Bildes.";
-                header("Location: products.php");
+                header("Location: ../products.php");
                 exit();
             }
         }
@@ -121,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else {
             $_SESSION['success_message'] = "Fehler bei der Vorbereitung der Anweisung: " . $conn->error;
         }
-        header("Location: products.php");
+        header("Location: ../products.php");
         exit();
     }
 }

@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->close();
             }
         }
-        header("Location: deliveryZones.php");
+        header("Location: ../deliveryZones.php");
         exit();
     }
 
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->close();
             }
         }
-        header("Location: deliveryZones.php");
+        header("Location: ../deliveryZones.php");
         exit();
     }
 
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['success_message'] = "Ungültige Stadt-ID.";
             $_SESSION['message_type'] = "error";
         }
-        header("Location: deliveryZones.php");
+        header("Location: ../deliveryZones.php");
         exit();
     }
 
@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             $stmt->close();
         }
-        header("Location: deliveryZones.php");
+        header("Location: ../deliveryZones.php");
         exit();
     }
 
@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             $stmt->close();
         }
-        header("Location: deliveryZones.php");
+        header("Location: ../deliveryZones.php");
         exit();
     }
 
@@ -176,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['success_message'] = "Ungültige Zone-ID.";
             $_SESSION['message_type'] = "error";
         }
-        header("Location: deliveryZones.php");
+        header("Location: ../deliveryZones.php");
         exit();
     }
 }

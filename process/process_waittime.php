@@ -10,14 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wartezeit_num'], $_PO
     $wartezeit = $wartezeitNum . ' ' . $wartezeitEinheit;
     
     // In eine Textdatei speichern
-    file_put_contents('wartezeit.txt', $wartezeit);
+    file_put_contents('../wartezeit.txt', $wartezeit);
     
     $_SESSION['success_message'] = "Die Wartezeit wurde erfolgreich aktualisiert!";
 }
 
 
 // Weiterleitung zurück zum Dashboard
-header("Location: wartezeit_dashboard.php");
+header("Location: ../wartezeit_dashboard.php");
 $conn->close();
 exit();
 ?>

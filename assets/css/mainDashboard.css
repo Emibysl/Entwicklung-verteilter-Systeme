@@ -881,7 +881,7 @@ button {
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   font-size: 16px;
-  z-index: 1000;
+  z-index: 10000;
 }
 #löschbutton {
   background-color: #a00;
