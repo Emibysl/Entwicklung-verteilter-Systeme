@@ -1,0 +1,92 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--first-color);
+  margin: 0;
+  padding: 20px;
+}
+.back-button {
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: #ffffff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.container {
+  max-width: 100%;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  table-layout: auto;
+}
+table,
+th,
+td {
+  border: 1px solid #ddd;
+}
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+th {
+  background-color: var(--first-color);
+  color: #fff;
+}
+button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background-color: #218838;
+}
+button:hover.delete-btn {
+  background-color: #800;
+}
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+/* Stornierte Bestellungen */
+.cancelled {
+  background-color: #f8d7da; /* Rote Hintergrundfarbe für stornierte Bestellungen */
+  color: #721c24; /* Dunkelrote Schriftfarbe */
+}
+.delete-btn:disabled {
+  background-color: #cccccc; /* Graue Hintergrundfarbe für deaktivierte Buttons */
+  color: #666666; /* Graue Schriftfarbe */
+  cursor: not-allowed; /* Zeiger ändern sich zu einem nicht erlaubten Cursor */
+}
+
+.order-content {
+  white-space: normal; /* Erlaubt Zeilenumbruch */
+  word-wrap: break-word; /* Lange Wörter umbrechen */
+  overflow-wrap: break-word; /* Zusätzlicher Umbruch für ältere Browser */
+  max-width: 300px; /* Optional: maximale Breite für die Zelle */
+}
+/* Optional: Wenn du eine maximale Höhe und Scrollen möchtest */
+.order-content-scroll {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-height: 300px; /* maximale Höhe, anpassbar */
+  overflow-y: auto; /* vertikales Scrollen erlauben */
+}

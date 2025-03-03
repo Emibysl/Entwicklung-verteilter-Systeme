@@ -1,0 +1,70 @@
+body {
+  font-family: Courier, sans-serif;
+  font-size: 12px;
+  line-height: 1.6;
+  max-width: 280px;
+  margin: auto;
+  padding: 20px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: #ffffff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.header,
+.totals {
+  text-align: center;
+  margin-bottom: 15px;
+}
+.header h2,
+.footer h4 {
+  margin: 5px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+.totals-table,
+.payment-table,
+.tax-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.totals-table td,
+.payment-table td,
+.tax-table td {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+}
+.totals-table td:first-child,
+.payment-table td:first-child,
+.tax-table td:first-child {
+  text-align: left;
+}
+.totals-table td:last-child,
+.payment-table td:last-child,
+.tax-table td:last-child {
+  text-align: right;
+}
+.payment-table td:nth-child(2) {
+  text-align: center;
+}
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 10px 0;
+}
+.bold {
+  font-weight: bold;
+}

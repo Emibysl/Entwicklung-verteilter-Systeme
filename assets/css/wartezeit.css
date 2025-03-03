@@ -1,100 +1,92 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
 }
-
-.container {
-    background-color: #ffffff;
-    width: 80%;
-    max-width: 400px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-h1 {
-    color: #333;
-    font-size: 24px;
-}
-
-.input-group {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-label {
-    font-size: 16px;
-    color: #555;
-    display: block;
-    margin-bottom: 5px;
-}
-
-input[type="number"] {
-    width: 50%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-right: 10px;
-}
-
-select {
-    width: 40%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-}
-
-button:hover {
-    background-color: #218838;
-}
-
 .back-button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 14px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: calc(100% - 40px); /* Verhindert Überlaufen, passt sich an Containerbreite an */
-    max-width: 300px; /* Optionale maximale Breite */
-    text-align: center;
-    text-decoration: none;
-    margin-left: auto;
-    margin-right: auto;
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: #ffffff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.container {
+  max-width: 100%;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  table-layout: auto;
+}
+table,
+th,
+td {
+  border: 1px solid #ddd;
+}
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+th {
+  background-color: var(--first-color);
+  color: #fff;
+}
+button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background-color: #218838;
+}
+button:hover.delete-btn {
+  background-color: #800;
+}
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+/* Stornierte Bestellungen */
+.cancelled {
+  background-color: #f8d7da; /* Rote Hintergrundfarbe für stornierte Bestellungen */
+  color: #721c24; /* Dunkelrote Schriftfarbe */
+}
+.delete-btn:disabled {
+  background-color: #cccccc; /* Graue Hintergrundfarbe für deaktivierte Buttons */
+  color: #666666; /* Graue Schriftfarbe */
+  cursor: not-allowed; /* Zeiger ändern sich zu einem nicht erlaubten Cursor */
 }
 
-
-.back-button:hover {
-    background-color: #0056b3;
+.order-content {
+  white-space: normal; /* Erlaubt Zeilenumbruch */
+  word-wrap: break-word; /* Lange Wörter umbrechen */
+  overflow-wrap: break-word; /* Zusätzlicher Umbruch für ältere Browser */
+  max-width: 300px; /* Optional: maximale Breite für die Zelle */
 }
-
-.message {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #28a745;
+/* Optional: Wenn du eine maximale Höhe und Scrollen möchtest */
+.order-content-scroll {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-height: 300px; /* maximale Höhe, anpassbar */
+  overflow-y: auto; /* vertikales Scrollen erlauben */
 }
