@@ -1,55 +1,45 @@
 $(document).ready(function () {
-  // Event-Listener für die Eingabe im Suchfeld
   $("#search-input").on("input", function () {
     var searchQuery = $(this).val().toLowerCase();
-
-    // Schleife durch jedes Accordion und überprüfe, ob eines der Produkte den Suchbegriff im Titel enthält
     $(".accordion").each(function () {
-      var found = false; // Flag, um zu überprüfen, ob mindestens ein Produkt gefunden wurde
-
-      // Schleife durch die Produkte innerhalb des Accordions
+      var found = false;
       $(this)
         .find(".product")
         .each(function () {
           var productName = $(this).find("h3").text().toLowerCase();
 
-          // Wenn der Produktname den Suchbegriff enthält, zeige das Produkt an
           if (productName.includes(searchQuery)) {
-            $(this).show(); // Zeige das Produkt an
-            found = true; // Setze das Flag auf true
+            $(this).show(); 
+            found = true;
           } else {
-            $(this).hide(); // Verstecke das Produkt
+            $(this).hide();
           }
         });
 
-      // Wenn kein Produkt innerhalb des Accordions den Suchbegriff enthält, verstecke das gesamte Accordion
       if (found) {
-        $(this).show(); // Zeige das Accordion, da mindestens ein passendes Produkt gefunden wurde
+        $(this).show();
       } else {
-        $(this).hide(); // Verstecke das Accordion, wenn kein passendes Produkt gefunden wurde
+        $(this).hide();
       }
     });
   });
 });
 function toggleAccordion(clickedHeader) {
-  // Alle Accordion-Inhalte holen
   const allContent = document.querySelectorAll(".accordion-content");
   const allHeaders = document.querySelectorAll(".accordion-header span");
 
-  // Accordion-Inhalte und Symbole durchlaufen
   allContent.forEach((content) => {
     if (content !== clickedHeader.nextElementSibling) {
-      content.classList.remove("show"); // Schließen
+      content.classList.remove("show");
     }
   });
 
   allHeaders.forEach((span) => {
     if (span !== clickedHeader.querySelector("span")) {
-      span.textContent = "+"; // Standard-Symbol
+      span.textContent = "+";
     }
   });
 
-  // Das aktuelle Accordion ein- oder ausklappen
   const content = clickedHeader.nextElementSibling;
   const span = clickedHeader.querySelector("span");
   content.classList.toggle("show");

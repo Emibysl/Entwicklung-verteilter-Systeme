@@ -3,7 +3,7 @@
 $dbServername = "localhost";  // Nicht mehr IONOS-Servername!
 $dbUsername = "root";         // XAMPP Standardbenutzer
 $dbPassword = "";             // Kein Passwort standardmäßig
-$dbName = "datenbank_verteiltesysteme";      // Name der importierten DB
+$dbName = "db_verteilteSysteme";      // Name der importierten DB
 $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 
 // Überprüfen, ob Verbindung erfolgreich war

@@ -1,5 +1,4 @@
 <?php
-// mainDashboard.php
 session_start();
 require_once 'inc/dbverb.php';
 require_once 'inc/functions.php';
