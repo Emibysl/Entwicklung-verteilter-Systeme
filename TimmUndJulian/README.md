@@ -29,9 +29,23 @@ Dies ist eine Softwarekomponente des Projekts „Foody“, die im Rahmen des Kur
 - **Wichtiger Hinweis zu Bestellungen:**
   - Damit Bestellungen in der Bestellübersicht angezeigt werden, müssen in der Tabelle `Bestellungentest` die Datumswerte der Bestellungen auf den heutigen Tag umgestellt werden. Andernfalls erscheinen diese Bestellungen nicht in der Übersicht der aktuellen Bestellungen.
 
+## Schnittstellen und Integration mit anderen Komponenten
+
+- **Login und Restaurant-Account:**
+  - In dieser Komponente ist kein Login implementiert, da die Authentifizierung und Benutzerverwaltung von einem anderen Teammitglied realisiert wird. 
+  - Restaurantbesitzer loggen sich in ihren individuellen Restaurant-Account ein, wodurch sie Zugriff auf ihr Dashboard erhalten.
+
+- **Startseite und Speisekartenanzeige:**
+  - Es gibt eine separate Startseite, auf der alle Restaurants aufgelistet werden.
+  - Beim Anklicken eines Restaurants gelangt der Benutzer zur entsprechenden Speisekarte, die vom Restaurantbesitzer verwaltet wird. Diese Speisekarte ist identisch mit der im Dashboard bearbeiteten.
+
+- **Lieferantentracking:**
+  - Eine zusätzliche Softwarekomponente zur Verfolgung der Lieferanten ist ebenfalls Bestandteil des Gesamtprojekts.
+  - Durch eine Freigabe der Bestellung im Restaurant-Dashboard erhält der Kunde Zugriff auf den Standort des Lieferfahrers und kann den Status seiner Bestellung nachverfolgen. Aufgrund der Fokussierung dieser Komponente auf die Verwaltung von Speisekarten, Lieferbereichen und Bestellungen wurde die Freigabe einer Bestellung aus Vereinfachungsgründen nicht direkt integriert.
+
 ## Datenbankkonfiguration
 
-Damit das Projekt auf dem Rechner des Professors reibungslos ausgeführt werden kann, müssen folgende Schritte für die Datenbank durchgeführt werden:
+Damit das Projekt auf eurem Rechner ausgeführt werden kann, müssen folgende Schritte für die Datenbank durchgeführt werden:
 
 1. **Datenbank erstellen:**
    - XAMPP starten und phpMyAdmin öffnen.
@@ -49,7 +63,7 @@ Damit das Projekt auf dem Rechner des Professors reibungslos ausgeführt werden 
      $servername = "localhost";
      $username = "root";  // Standardbenutzer in XAMPP
      $password = "";      // Standardmäßig kein Passwort
-     $dbname = "foody_db";
+     $dbname = "foody_db";// Hier den Namen eintragen, den ihr der Datenbank gegeben habt
 
      $conn = new mysqli($servername, $username, $password, $dbname);
 
