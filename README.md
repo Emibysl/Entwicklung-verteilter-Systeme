@@ -12,6 +12,8 @@ Dies ist eine Softwarekomponente des Projekts „Foody“, die im Rahmen des Kur
 - **Wartezeit anpassen:** Anpassung der Wartezeit, die den Kunden angezeigt werden soll.
 - **Lieferbereiche anpassen:** Anpassung der Zonen und Städte, in die geliefert werden soll inkl. Preisänderungen, Mindestbestellwerten und Lieferkosten.
 
+Auf die Erstellung von Belegen und Tages/Monatsabschlüssen wurde in dieser Komponente verzichtet, da dies den Rahmen sprengen würde und außerhalb des Fähigkeitsbereichs meiner selbst liegt :).
+
 ## Voraussetzungen
 
 - **XAMPP**
@@ -52,7 +54,7 @@ Damit das Projekt auf eurem Rechner ausgeführt werden kann, müssen folgende Sc
    - Neue Datenbank erstellen, z. B. `foody_db`.
 
 2. **SQL-Dump importieren:**
-   - Im Projekt liegt eine SQL-Dump-Datei (z. B. `database.sql`) bei, die alle notwendigen Tabellen und Testdaten enthält.
+   - Im Projekt liegt eine SQL-Dump-Datei (`database.sql`) bei, die alle notwendigen Tabellen und Testdaten enthält.
    - In phpMyAdmin die neu erstellte Datenbank auswählen und Daten importieren.
 
 3. **Datenbankverbindung anpassen:**
@@ -75,15 +77,18 @@ Damit das Projekt auf eurem Rechner ausgeführt werden kann, müssen folgende Sc
 
 ## Projektstruktur
 
+- **assets/**
+  - **css/**: CSS-Dateien für das Styling.
+  - **js/**: JavaScript-Dateien.
+
 - **inc/**  
   Enthält PHP-Includes wie `dbverb.php` (Datenbankverbindung) und `functions.php` (Hilfsfunktionen, z.B. `escape()`).
 
 - **process/**  
   Enthält Verarbeitungsskripte wie `process_product.php`.
 
-- **assets/**
-  - **css/**: CSS-Dateien für das Styling.
-  - **js/**: JavaScript-Dateien.
+- **TimmUndJulian/**
+  Enthält die SQL-Dump-Datei.
 
 - **uploads/**  
   Ordner für Produktbilder.
