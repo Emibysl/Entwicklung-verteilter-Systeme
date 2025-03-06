@@ -12,7 +12,7 @@ Dies ist eine Softwarekomponente des Projekts „Foody“, die im Rahmen des Kur
 - **Wartezeit anpassen:** Anpassung der Wartezeit, die den Kunden angezeigt werden soll.
 - **Lieferbereiche anpassen:** Anpassung der Zonen und Städte, in die geliefert werden soll inkl. Preisänderungen, Mindestbestellwerten und Lieferkosten.
 
-Auf die Erstellung von Belegen und Tages/Monatsabschlüssen wurde in dieser Komponente verzichtet, da dies den Rahmen sprengen würde und außerhalb des Fähigkeitsbereichs meiner selbst liegt :).
+Auf die Erstellung von Belegen und Tages/Monatsabschlüssen wurde in dieser Komponente verzichtet, da dies den Rahmen sprengen würde und außerhalb des Fähigkeitsbereichs meiner selbst liegt.
 
 ## Voraussetzungen
 
