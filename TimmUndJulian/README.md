@@ -74,6 +74,4 @@ Damit das Projekt auf dem Rechner des Professors reibungslos ausgeführt werden 
 - **uploads/**  
   Ordner für Produktbilder.
 
-## Hinweise zur Nutzung von XAMPP
-
 ---
