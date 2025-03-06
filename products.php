@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	require_once 'process/process_product.php';
 }
 
-// Variablen für den Header
+// Variablen für Header.php
 $additionalCSS = '<link rel="stylesheet" href="assets/css/products.css">';
 $pageTitle   = "Produkt hinzufügen";
 $headerTitle = "Produkt hinzufügen";
@@ -96,12 +96,13 @@ include 'inc/header.php';
 <!-- Menü-Popup -->
 <div id="menu-popup" class="menu-popup">
 	<div class="menu-popup-content">
+		<!--hier wurde statt x &times; verwendet, weil es schöner aussieht-->
 		<span class="close" onclick="toggleMenu()">&times;</span>
 		<h2>Navigation</h2>
 		<ul>
 			<li><a href="mainDashboard.php">Speisekartenverwaltung</a></li>
 			<li><a href="orders.php">Offene Bestellungen</a></li>
-			<li><a href="products.php" style="font-weight: bold;">Neues Produkt anlegen✅</a></li>
+			<li><a href="products.php" id="active">Neues Produkt anlegen</a></li>
 			<li><a href="waittime.php">Wartezeit anpassen</a></li>
 			<li><a href="deliveryZones.php">Lieferbereiche anpassen</a></li>
 		</ul>

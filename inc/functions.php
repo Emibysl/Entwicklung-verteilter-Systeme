@@ -1,17 +1,18 @@
 <?php
-//process_product.php
+//Leerzeichen loswerden
 function sanitizeInput($data)
 {
     return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
 }
 
+//XSS verhindern
 function escape($data)
 {
     return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
 }
 
 
-//deliveryZones.php
+// in deliveryZones.php
 function getCities($conn)
 {
     $sql = "SELECT id, stadt_name, zone_id FROM staedte";
@@ -24,7 +25,7 @@ function getZones($conn)
     return $conn->query($sql);
 }
 
-//mainDashboard.php
+// in mainDashboard.php
 function getProductsByCategory($conn, $searchTerm = '')
 {
     if (!empty($searchTerm)) {
@@ -55,7 +56,7 @@ function getProductsByCategory($conn, $searchTerm = '')
     }
 }
 
-//orders.php
+// in orders.php
 function getTodayOrders($conn)
 {
     $sql = "SELECT b.*,

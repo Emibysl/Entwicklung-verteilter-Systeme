@@ -43,18 +43,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Wenn ein neues Bild hochgeladen wurde, verarbeite es
         if (!empty($_FILES['bild']['name'])) {
-            $targetDir = "../uploads/";
+            $targetDir = "../uploads";
             $bild = basename($_FILES['bild']['name']);
             $targetFile = $targetDir . $bild;
             $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
             if (!in_array($fileType, ["jpg", "jpeg", "png"])) {
                 $_SESSION['success_message'] = "Nur JPG, JPEG und PNG Dateien sind erlaubt.";
+                $_SESSION['message_type'] = "error";
                 header("Location: ../mainDashboard.php");
                 exit();
             }
             if (!move_uploaded_file($_FILES["bild"]["tmp_name"], $targetFile)) {
                 $_SESSION['success_message'] = "Fehler beim Hochladen des Bildes.";
+                $_SESSION['message_type'] = "error";
                 header("Location: ../mainDashboard.php");
                 exit();
             }
@@ -85,18 +87,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Bildverarbeitung, falls ein Bild hochgeladen wurde
         if (isset($_FILES['bild']) && $_FILES['bild']['error'] === 0) {
-            $targetDir = "uploads/";
+            $targetDir = "../uploads";
             $bild = basename($_FILES['bild']['name']);
             $targetFile = $targetDir . $bild;
             $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
             if (!in_array($fileType, ["jpg", "jpeg", "png"])) {
                 $_SESSION['success_message'] = "Nur JPG, JPEG und PNG Dateien sind erlaubt.";
+                $_SESSION['message_type'] = "error";
                 header("Location: ../products.php");
                 exit();
             }
             if (!move_uploaded_file($_FILES["bild"]["tmp_name"], $targetFile)) {
                 $_SESSION['success_message'] = "Fehler beim Hochladen des Bildes.";
+                $_SESSION['message_type'] = "error";
                 header("Location: ../products.php");
                 exit();
             }

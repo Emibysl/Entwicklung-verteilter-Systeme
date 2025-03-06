@@ -3,19 +3,20 @@ session_start();
 require_once 'inc/dbverb.php';
 require_once 'inc/functions.php';
 
-//Bearbeiten oder Löschen von Produkten
+// Bei POST-Anfragen wird die process_product.php aufgerufen
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once 'process/process_product.php';
 }
 
 $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
+
 $productsByCategory = getProductsByCategory($conn, $searchTerm);
 if (!$productsByCategory) {
     $noProducts = true;
 }
 $conn->close();
 
-// Variablen für den Header
+// Variablen für Header.php
 $pageTitle   = "Restaurant-Dashboard";
 $headerTitle = "Willkommen im Restaurant-Dashboard";
 
@@ -26,15 +27,16 @@ include 'inc/header.php';
     <div class="container">
         <h1 class="section__title">Speisekarte</h1>
         <div class="search-container">
-            <form class="search-form" method="GET" action="mainDashboard.php">
-                <input type="text" id="search-input" name="search" placeholder="Produkt suchen..." autocomplete="off">
+            <form class="search-form" method="GET">
+                <input type="text" id="search-input" name="search" placeholder="Produkt suchen...">
             </form>
         </div>
 
         <div class="products">
-            <?php if (isset($noProducts) && $noProducts): ?>
+            <?php if ($noProducts): ?>
                 <p>Keine Produkte vorhanden.</p>
             <?php else: ?>
+                <!--Jede Kategorie wird zum Accordion-->
                 <?php foreach ($productsByCategory as $category => $products): ?>
                     <div class="accordion">
                         <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -57,7 +59,7 @@ include 'inc/header.php';
                                         </div>
                                         <div class="product-buttons">
                                             <button type="button" class="edit" onclick='openEditForm(<?= json_encode($product) ?>)'>Bearbeiten</button>
-                                            <form method="POST" action="mainDashboard.php" onsubmit="return confirmDelete();">
+                                            <form method="POST" onsubmit="return confirmDelete();">
                                                 <input type="hidden" name="delete_id" value="<?= (int)$product['id'] ?>">
                                                 <button id="löschbutton" type="submit">Löschen</button>
                                             </form>
@@ -77,10 +79,11 @@ include 'inc/header.php';
 <!-- Menü-Popup -->
 <div id="menu-popup" class="menu-popup">
     <div class="menu-popup-content">
+        <!--hier wurde statt x &times; verwendet, weil es schöner aussieht-->
         <span class="close" onclick="toggleMenu()">&times;</span>
         <h2>Navigation</h2>
         <ul>
-            <li><a href="mainDashboard.php" style="font-weight: bold;">Speisekartenverwaltung✅</a></li>
+            <li><a href="mainDashboard.php" id="active">Speisekartenverwaltung</a></li>
             <li><a href="orders.php">Offene Bestellungen</a></li>
             <li><a href="products.php">Neues Produkt anlegen</a></li>
             <li><a href="waittime.php">Wartezeit anpassen</a></li>
@@ -97,7 +100,7 @@ include 'inc/header.php';
         <span class="edit-modal-close" onclick="closeEditForm()">&times;</span>
     </div>
     <div class="edit-modal-body">
-        <form action="mainDashboard.php" method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data">
             <input type="hidden" name="id" id="edit_product_id">
             <label for="edit_name">Produktname:</label>
             <input type="text" id="edit_name" name="name" required>
@@ -112,15 +115,15 @@ include 'inc/header.php';
             <label for="edit_bild">Produktbild:</label>
             <input type="file" id="edit_bild" name="bild" accept="image/*">
             <div class="edit-modal-buttons">
-                <button type="submit" class="save-btn">Speichern</button>
-                <button type="button" class="cancel-btn" onclick="closeEditForm()">Abbrechen</button>
+                <button type="submit" class="save-button">Speichern</button>
+                <button type="button" class="cancel-button" onclick="closeEditForm()">Abbrechen</button>
             </div>
         </form>
     </div>
 </div>
 
 <!-- Verstecktes Formular, das beim Klick auf "Löschen" abgesendet wird -->
-<form id="deleteForm" action="mainDashboard.php" method="POST" style="display: none;">
+<form id="deleteForm" method="POST" style="display: none;">
     <input type="hidden" name="delete_id" id="delete_id">
 </form>
 

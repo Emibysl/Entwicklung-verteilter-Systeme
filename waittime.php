@@ -14,7 +14,7 @@ preg_match('/(\d+)\s(\w+)/', $waittime, $matches);
 $waittimeNum = $matches[1] ?? 30;
 $waittimeEinheit = $matches[2] ?? 'Minuten';
 
-// Variablen für den Header
+// Variablen für Header.php
 $additionalCSS = '<link rel="stylesheet" href="assets/css/products.css">';
 $pageTitle   = "Wartezeit-Dashboard";
 $headerTitle = "Wartezeit-Dashboard";
@@ -46,13 +46,14 @@ include 'inc/header.php';
 <!-- Menü-Popup -->
 <div id="menu-popup" class="menu-popup">
     <div class="menu-popup-content">
+        <!--hier wurde statt x &times; verwendet, weil es schöner aussieht-->
         <span class="close" onclick="toggleMenu()">&times;</span>
         <h2>Navigation</h2>
         <ul>
             <li><a href="mainDashboard.php">Speisekartenverwaltung</a></li>
             <li><a href="orders.php">Offene Bestellungen</a></li>
             <li><a href="products.php">Neues Produkt anlegen</a></li>
-            <li><a href="waittime.php" style="font-weight: bold;">Wartezeit anpassen✅</a></li>
+            <li><a href="waittime.php" id="active">Wartezeit anpassen</a></li>
             <li><a href="deliveryZones.php">Anpassung der Lieferbereiche (Kosten)</a></li>
         </ul>
     </div>

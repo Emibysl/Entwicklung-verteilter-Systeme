@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $pageTitle ?? 'Dashboard' ?></title>
-    <!-- Gemeinsame CSS-Datei -->
     <link rel="stylesheet" href="assets/css/mainDashboard.css">
-    <!-- Zusätzliche CSS-Dateien können über $additionalCSS eingebunden werden -->
     <?php if (isset($additionalCSS)) echo $additionalCSS; ?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>

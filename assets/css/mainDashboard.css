@@ -1,4 +1,4 @@
-/* Google Fonts importieren */
+/* ----------------------------------------Youtube-Video BEGINN---------------------------------- */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Titan+One&display=swap");
 
 /* CSS-Variablen */
@@ -127,6 +127,7 @@ img {
     left: 0;
   }
 }
+/* ----------------------------------------Youtube-Video ENDE---------------------------------- */
 
 /* Produkte */
 .products {
@@ -535,7 +536,7 @@ button {
   margin-top: 1.5rem;
 }
 
-.save-btn {
+.save-button {
   background-color: #ff9800;
   color: #fff;
   padding: 0.7rem 1.2rem;
@@ -546,11 +547,11 @@ button {
   transition: background-color 0.2s ease;
 }
 
-.save-btn:hover {
+.save-button:hover {
   background-color: #e08a00;
 }
 
-.cancel-btn {
+.cancel-button {
   background-color: #fff;
   color: #333;
   padding: 0.7rem 1.2rem;
@@ -561,7 +562,7 @@ button {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.cancel-btn:hover {
+.cancel-button:hover {
   background-color: #f2f2f2;
 }
 
@@ -604,4 +605,8 @@ button {
 
 #löschbutton:hover {
   background-color: rgb(105, 0, 0);
+}
+
+#active {
+  font-weight: bold;
 }

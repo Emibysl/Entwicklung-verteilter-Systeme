@@ -5,7 +5,7 @@ include_once 'inc/dbverb.php';
 
 $result_all_orders = getTodayOrders($conn);
 
-// Variablen für den Header
+// Variablen für Header.php
 $additionalCSS = '<link rel="stylesheet" href="assets/css/orders.css">';
 $pageTitle   = "Bestellungen-Dashboard";
 $headerTitle = "Bestellungen-Dashboard";
@@ -30,8 +30,11 @@ include 'inc/header.php';
                 <th>Bestell-Typ</th>
                 <th>Uhrzeit</th>
             </tr>
+            <!--Jede Bestellung-->
             <?php while ($row_all = $result_all_orders->fetch_assoc()): ?>
+                <!--Neue Zeile-->
                 <tr>
+                    <!--Neue Zelle-->
                     <td><?= escape($row_all["BestellungID"]) ?></td>
                     <td><?= escape($row_all["KundeName"]) ?></td>
                     <td><?= escape($row_all["KundeAdresse"]) ?></td>
@@ -53,11 +56,12 @@ include 'inc/header.php';
 
 <div id="menu-popup" class="menu-popup">
     <div class="menu-popup-content">
+        <!--hier wurde statt x &times; verwendet, weil es schöner aussieht-->
         <span class="close" onclick="toggleMenu()">&times;</span>
         <h2>Navigation</h2>
         <ul>
             <li><a href="mainDashboard.php">Speisekartenverwaltung</a></li>
-            <li><a href="orders.php" style="font-weight: bold;">Offene Bestellungen✅</a></li>
+            <li><a href="orders.php" id="active">Offene Bestellungen</a></li>
             <li><a href="products.php">Neues Produkt anlegen</a></li>
             <li><a href="waittime.php">Wartezeit anpassen</a></li>
             <li><a href="deliveryZones.php">Lieferbereiche anpassen</a></li>
