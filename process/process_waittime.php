@@ -10,13 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['waittime_num'], $_POS
     $waittime = $waittimeNum . ' ' . $waittimeEinheit;
 
     // In eine Textdatei speichern
-    file_put_contents('../wartezeit.txt', $waittime);
+    file_put_contents('wartezeit.txt', $waittime);
 
     $_SESSION['success_message'] = "Die Wartezeit wurde erfolgreich aktualisiert!";
 }
-
-
-// Weiterleitung zurück zum Dashboard
 header("Location: ../waittime.php");
 $conn->close();
 exit();
