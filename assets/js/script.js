@@ -24,6 +24,7 @@ $(document).ready(function () {
     });
   });
 });
+
 function toggleAccordion(clickedHeader) {
   const allContent = document.querySelectorAll(".accordion-content");
   const allHeaders = document.querySelectorAll(".accordion-header span");

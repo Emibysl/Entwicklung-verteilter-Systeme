@@ -1,12 +1,12 @@
 <?php
-// process_product.php
 session_start();
-require_once 'inc/dbverb.php';
-require_once 'inc/functions.php';
+require_once 'inc/dbverb.php'; // DB Verbindung herstellen
+require_once 'inc/functions.php'; // Funktionen einbinden
 
 
-/* PRODUKT LÖSCHEN */
+//Produkt löschen
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
+    //Validierung der ID
     $delete_id = filter_var($_POST['delete_id'], FILTER_VALIDATE_INT);
     if ($delete_id !== false) {
         // Lösche das Produkt
@@ -25,27 +25,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
     } else {
         $_SESSION['success_message'] = "Ungültige Produkt-ID.";
     }
+    // Umleitung auf deliveryZones.php
     header("Location: ../mainDashboard.php");
     exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // Unterscheide, ob ein Produkt bearbeitet (Update) oder neu angelegt (Insert) wird
+    // Unterscheiden, ob Produkt bearbeitet oder neu angelegt wird (ID auf Existenz prüfn)
     if (isset($_POST['id']) && !empty($_POST['id'])) {
-        // PRODUKT BEARBEITEN (Update)
+        // Produkt bearbeiten
         $id = $_POST['id'];
         $name = sanitizeInput($_POST['name']);
-        $preis = floatval($_POST['preis']);
-        $beschreibung = sanitizeInput($_POST['beschreibung']);
-        $allergien = isset($_POST['allergien']) ? implode(',', $_POST['allergien']) : '';
-        $kategorie = sanitizeInput($_POST['kategorie']);
+        $price = floatval($_POST['preis']);
+        $description = sanitizeInput($_POST['beschreibung']);
+        $allergies = isset($_POST['allergien']) ? implode(',', $_POST['allergien']) : '';
+        $category = sanitizeInput($_POST['kategorie']);
 
-        // Wenn ein neues Bild hochgeladen wurde, verarbeite es
+        // Wenn neues Bild hochgeladen wurde, verarbeiten
         if (!empty($_FILES['bild']['name'])) {
             $targetDir = "../uploads";
-            $bild = basename($_FILES['bild']['name']);
-            $targetFile = $targetDir . $bild;
+            $picture = basename($_FILES['bild']['name']);
+            $targetFile = $targetDir . $picture;
             $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
             if (!in_array($fileType, ["jpg", "jpeg", "png"])) {
@@ -61,11 +62,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 exit();
             }
             $stmt = $conn->prepare("UPDATE produkte SET name=?, preis=?, bild=?, kategorie=?, produktbeschreibung=?, allergien=? WHERE id=?");
-            $stmt->bind_param("sdssssi", $name, $preis, $bild, $kategorie, $beschreibung, $allergien, $id);
+            $stmt->bind_param("sdssssi", $name, $price, $picture, $category, $description, $allergies, $id);
         } else {
             // Kein neues Bild, daher ohne Bildupdate
             $stmt = $conn->prepare("UPDATE produkte SET name=?, preis=?, kategorie=?, produktbeschreibung=?, allergien=? WHERE id=?");
-            $stmt->bind_param("sdsssi", $name, $preis, $kategorie, $beschreibung, $allergien, $id);
+            $stmt->bind_param("sdsssi", $name, $price, $category, $description, $allergies, $id);
         }
 
         if ($stmt->execute()) {
@@ -79,17 +80,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         // PRODUKT HINZUFÜGEN (Insert)
         $name = sanitizeInput($_POST['name']);
-        $kategorie = sanitizeInput($_POST['kategorie']);
-        $beschreibung = sanitizeInput($_POST['beschreibung']);
-        $allergien = isset($_POST['allergien']) ? implode(',', $_POST['allergien']) : '';
-        $preis = floatval($_POST['preis']);
-        $bild = '';
-
+        $category = sanitizeInput($_POST['kategorie']);
+        $description = sanitizeInput($_POST['beschreibung']);
+        $allergies = isset($_POST['allergien']) ? implode(',', $_POST['allergien']) : '';
+        $price = floatval($_POST['preis']);
+        $picture = '';
         // Bildverarbeitung, falls ein Bild hochgeladen wurde
         if (isset($_FILES['bild']) && $_FILES['bild']['error'] === 0) {
             $targetDir = "../uploads";
-            $bild = basename($_FILES['bild']['name']);
-            $targetFile = $targetDir . $bild;
+            $picture = basename($_FILES['bild']['name']);
+            $targetFile = $targetDir . $picture;
             $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
             if (!in_array($fileType, ["jpg", "jpeg", "png"])) {
@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $sql = "INSERT INTO produkte (name, preis, bild, kategorie, produktbeschreibung, allergien) VALUES (?, ?, ?, ?, ?, ?)";
         if ($stmt = $conn->prepare($sql)) {
-            $stmt->bind_param("sdssss", $name, $preis, $bild, $kategorie, $beschreibung, $allergien);
+            $stmt->bind_param("sdssss", $name, $price, $picture, $category, $description, $allergies);
             if ($stmt->execute()) {
                 $_SESSION['success_message'] = "Produkt wurde erfolgreich hinzugefügt!";
             } else {

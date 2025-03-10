@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once 'inc/dbverb.php';
-require_once 'inc/functions.php';
+require_once 'inc/dbverb.php'; // DB Verbindung herstellen
+require_once 'inc/functions.php'; // Funktionen einbinden
 
 // Bei POST-Anfragen wird process_deliveryZones.php aufgerufen
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -9,8 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Daten laden mit get-Funktionen aus functions.php
-$staedteResult = getCities($conn);
-$zonenResult  = getZones($conn);
+$citiesResult = getCities($conn);
+$zonesResult  = getZones($conn);
+
 $conn->close();
 
 // Variablen für Header.php
@@ -25,6 +26,7 @@ include 'inc/header.php';
     <div class="container">
         <section>
             <h2>Städte bearbeiten</h2>
+            <!-- Tabelle fürs Städte bearbeiten -->
             <table>
                 <thead>
                     <tr>
@@ -34,16 +36,20 @@ include 'inc/header.php';
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while ($row = $staedteResult->fetch_assoc()): ?>
+                    <!-- Schleife über alle Städte aus DB -->
+                    <?php while ($row = $citiesResult->fetch_assoc()): ?>
                         <tr>
                             <form method="POST" style="margin:0;">
                                 <td>
+                                    <!-- Eingabefeld für Stadtnamen, Platzhalter ist aktueller Name -->
                                     <input type="text" name="stadt_name" value="<?= escape($row['stadt_name']) ?>">
                                 </td>
                                 <td>
+                                    <!-- Eingabefeld für Zonenid-->
                                     <input type="number" name="zone_id" value="<?= escape($row['zone_id']) ?>">
                                 </td>
                                 <td>
+                                    <!-- Verstecktes Feld mit eindeutiger Stadt-ID -->
                                     <input type="hidden" name="stadt_id" value="<?= (int)$row['id'] ?>">
                                     <button type="submit" name="update_staedte" class="save-button">Speichern</button>
                                     <button type="submit" name="delete_stadt" value="<?= (int)$row['id'] ?>" class="delete-button" onclick="return confirm('Stadt wirklich löschen?');" id="löschbutton">Löschen</button>
@@ -54,6 +60,7 @@ include 'inc/header.php';
                 </tbody>
             </table>
 
+            <!-- Formular zum Hinzufügen einer neuen Stadt -->
             <form method="POST">
                 <h3>Neue Stadt hinzufügen</h3>
                 <input type="text" name="stadt_name" placeholder="Stadtname" required>
@@ -64,6 +71,7 @@ include 'inc/header.php';
 
         <section>
             <h2>Zonen bearbeiten</h2>
+            <!-- Tabelle fürs Zone bearbeiten -->
             <table>
                 <thead>
                     <tr>
@@ -74,18 +82,21 @@ include 'inc/header.php';
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while ($row = $zonenResult->fetch_assoc()): ?>
+                    <!-- Schleife über alle Zonen aus DB -->
+                    <?php while ($row = $zonesResult->fetch_assoc()): ?>
                         <tr>
                             <form method="POST">
                                 <td><?= (int)$row['zonen_id'] ?></td>
                                 <td>
+                                    <!-- Eingabefeld für Mindestbestellwert -->
                                     <input type="number" step="0.01" name="mindestbestellwert" value="<?= escape($row['mindestbestellwert']) ?>" min="0">
                                 </td>
                                 <td>
+                                    <!-- Eingabefeld für Lieferkosten -->
                                     <input type="number" step="0.01" name="lieferkosten" value="<?= escape($row['lieferkosten']) ?>" min="0">
                                 </td>
                                 <td>
-                                    <!-- Dieses Feld versteckt, weil es eindeutige Zonenid enthält und die nicht geändert werden soll-->
+                                    <!-- Verstecktes Feld mit eindeutiger Zonenid -->
                                     <input type="hidden" name="zone_id" value="<?= (int)$row['zonen_id'] ?>">
                                     <button type="submit" name="update_zonen" class="save-button">Speichern</button>
                                     <button type="submit" name="delete_zone" value="<?= (int)$row['zonen_id'] ?>" class="delete-button" id="löschbutton" onclick="return confirm('Zone wirklich löschen?');">Löschen</button>
@@ -95,6 +106,8 @@ include 'inc/header.php';
                     <?php endwhile; ?>
                 </tbody>
             </table>
+
+            <!-- Formular zum Hinzufügen einer neuen Zone -->
             <form method="POST">
                 <h3>Neue Zone hinzufügen</h3>
                 <input type="number" step="0.01" name="mindestbestellwert" placeholder="Mindestbestellwert" min="0" required>

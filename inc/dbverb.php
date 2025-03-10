@@ -1,15 +1,14 @@
 <?php
-// Lokale XAMPP-Datenbankverbindung
-$dbServername = "localhost";  // Nicht mehr IONOS-Servername!
-$dbUsername = "root";         // XAMPP Standardbenutzer
-$dbPassword = "";             // Kein Passwort standardmäßig
-$dbName = "db_verteilteSysteme";      // Name der importierten DB
+$dbServername = "localhost";
+$dbUsername = "root";
+$dbPassword = "";
+$dbName = "db_verteilteSysteme";
 $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 
-// Überprüfen, ob Verbindung erfolgreich war
+// Überprüfen, ob Verbindung erfolgreich
 if ($conn->connect_error) {
-    error_log("Verbindung fehlgeschlagen: " . $conn->connect_error); // Protokolliere den Fehler
-    die("Verbindung zur Datenbank konnte nicht hergestellt werden."); // Allgemeine Fehlermeldung
+    error_log("Verbindung fehlgeschlagen: " . $conn->connect_error);//Fehler protokollieren
+    die("Verbindung zur Datenbank konnte nicht hergestellt werden.");//Fehlermeldung
 }
 
 // Setzen des Zeichensatzes auf utf8mb4

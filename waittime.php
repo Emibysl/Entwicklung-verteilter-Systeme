@@ -1,15 +1,15 @@
 <?php
 session_start();
-require_once 'inc/functions.php';
+require_once 'inc/functions.php'; // Funktionen einbinden
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once 'process/process_waittime.php';
 }
 
-// waittime aus der Datei laden – Standard: "30 Minuten"
+// Wartezeit aus der Datei laden – Standard: "30 Minuten"
 $waittime = file_exists('wartezeit.txt') ? file_get_contents('wartezeit.txt') : '30 Minuten';
 
-// Versuche, Zahl und Einheit zu extrahieren
+// Zahl und Einheit extrahieren
 preg_match('/(\d+)\s(\w+)/', $waittime, $matches);
 $waittimeNum = $matches[1] ?? 30;
 $waittimeEinheit = $matches[2] ?? 'Minuten';

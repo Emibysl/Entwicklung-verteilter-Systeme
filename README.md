@@ -45,6 +45,24 @@ Auf die Erstellung von Belegen und Tages/Monatsabschlüssen wurde in dieser Komp
   - Eine zusätzliche Softwarekomponente zur Verfolgung der Lieferanten ist ebenfalls Bestandteil des Gesamtprojekts.
   - Durch eine Freigabe der Bestellung im Restaurant-Dashboard erhält der Kunde Zugriff auf den Standort des Lieferfahrers und kann den Status seiner Bestellung nachverfolgen. Aufgrund der Fokussierung dieser Komponente auf die Verwaltung von Speisekarten, Lieferbereichen und Bestellungen wurde die Freigabe einer Bestellung aus Vereinfachungsgründen nicht direkt integriert.
 
+## Software-Design und Architektur
+
+- **Apache:**  
+  Der Webserver Apache nimmt alle HTTP-Anfragen entgegen und leitet sie an die entsprechenden PHP-Skripte weiter. So wird dynamischer Content generiert und an den Browser ausgeliefert.
+
+- **PHP:**  
+  PHP bildet das Rückgrat der serverseitigen Logik. Die Anwendung ist dabei in zwei Bereiche unterteilt:
+  - **Allgemeine Funktionen:**  
+    In der Datei `inc/functions.php` befinden sich allgemeine, wiederverwendbare Funktionen (z. B. `sanitizeInput()`oder `escape()`). Diese Funktionen werden in verschiedenen Teilen der Anwendung genutzt.
+  - **Spezifische Prozess-Funktionen:**  
+    Die Dateien im Ordner `process/` enthalten den Code, der spezifische CRUD-Operationen (z. B. zum Hinzufügen, Bearbeiten oder Löschen von Produkten oder Lieferzonen) implementiert.
+
+- **MariaDB:**  
+  MariaDB dient als Datenbank, in der alle relevanten Daten wie Produkte, Bestellungen und Lieferbereiche gespeichert werden. Die Verbindung zur Datenbank wird in `inc/dbverb.php` konfiguriert.
+
+- **Frontend:**  
+  Das Frontend wird mit HTML, CSS und JavaScript umgesetzt. Über Dateien wie `mainDashboard.php` und `products.php` werden die Benutzeroberfläche und die Interaktion mit den Benutzern realisiert. Diese Seiten kommunizieren über HTTP-Anfragen mit den PHP-Skripten, die im Backend die entsprechenden Operationen durchführen.
+
 ## Datenbankkonfiguration
 
 Damit das Projekt auf eurem Rechner ausgeführt werden kann, müssen folgende Schritte für die Datenbank durchgeführt werden:

@@ -1,19 +1,22 @@
 <?php
 session_start();
-require_once 'inc/dbverb.php';
-require_once 'inc/functions.php';
+require_once 'inc/dbverb.php'; // DB Verbindung herstellen
+require_once 'inc/functions.php'; // Funktionen einbinden
 
 // Bei POST-Anfragen wird die process_product.php aufgerufen
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once 'process/process_product.php';
 }
 
+//Prüfen, ob Suchbegriff vorhanden, sonst leer
 $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
 
+//Produkte gruppiert nach Kategorie durch Funktion aus Functions.php
 $productsByCategory = getProductsByCategory($conn, $searchTerm);
 if (!$productsByCategory) {
     $noProducts = true;
 }
+
 $conn->close();
 
 // Variablen für Header.php
@@ -26,40 +29,53 @@ include 'inc/header.php';
 <main class="main">
     <div class="container">
         <h1 class="section__title">Speisekarte</h1>
+        <!-- Suchbereich für Produkte -->
         <div class="search-container">
             <form class="search-form" method="GET">
+                <!-- Eingabefeld für Produktsuche -->
                 <input type="text" id="search-input" name="search" placeholder="Produkt suchen...">
             </form>
         </div>
 
+        <!-- Produktliste -->
         <div class="products">
+            <!-- Prüfen, ob Produkte gefunden sonst Rückmeldung, dass keine Produkte vorhanden -->
             <?php if ($noProducts): ?>
                 <p>Keine Produkte vorhanden.</p>
             <?php else: ?>
-                <!--Jede Kategorie wird zum Accordion-->
+                <!-- Jede Kategorie wird zum Akkordeon -->
                 <?php foreach ($productsByCategory as $category => $products): ?>
                     <div class="accordion">
+                        <!-- Akkordeon-Header zeigt Kategorienamen an und löst bei Klick die Funktion toggleAccordion() aus -->
                         <div class="accordion-header" onclick="toggleAccordion(this)">
                             <?= escape($category) ?> <span>+</span>
                         </div>
+                        <!-- Akkordeon enthält alle Produkte der jeweiligen Kategorie -->
                         <div class="accordion-content">
                             <div class="products">
+                                <!-- Schleife über alle Produkte der aktuellen Kategorie -->
                                 <?php foreach ($products as $product): ?>
                                     <div class="product" id="product_<?= escape($product['id']) ?>">
+                                        <!-- Produktbild wird aus Uploads-Ordner geladen -->
                                         <img src="uploads/<?= escape($product['bild']) ?>" alt="<?= escape($product['name']) ?>">
                                         <div class="product-info">
+                                            <!-- Produktname -->
                                             <h3><?= escape($product['name']) ?></h3>
+                                            <!-- Falls Produktbeschreibung vorhanden, anzeigen -->
                                             <?php if (!empty($product['produktbeschreibung'])): ?>
                                                 <p class="product-description"><?= escape($product['produktbeschreibung']) ?></p>
                                             <?php endif; ?>
+                                            <!-- Falls Allergien vorhanden, anzeigen -->
                                             <?php if (!empty($product['allergien'])): ?>
                                                 <p class="product-allergies">Allergien: <?= escape($product['allergien']) ?></p>
                                             <?php endif; ?>
+                                            <!-- Produktpreis -->
                                             <p class="price">Preis: <?= escape($product['preis']) ?>€</p>
                                         </div>
                                         <div class="product-buttons">
                                             <button type="button" class="edit" onclick='openEditForm(<?= json_encode($product) ?>)'>Bearbeiten</button>
                                             <form method="POST" onsubmit="return confirmDelete();">
+                                                <!-- Verstecktes Feld mit Produkt-ID, die gelöscht werden soll -->
                                                 <input type="hidden" name="delete_id" value="<?= (int)$product['id'] ?>">
                                                 <button id="löschbutton" type="submit">Löschen</button>
                                             </form>
@@ -75,7 +91,6 @@ include 'inc/header.php';
     </div>
 </main>
 
-<!-- Modale Fenster und Overlays -->
 <!-- Menü-Popup -->
 <div id="menu-popup" class="menu-popup">
     <div class="menu-popup-content">
@@ -121,11 +136,6 @@ include 'inc/header.php';
         </form>
     </div>
 </div>
-
-<!-- Verstecktes Formular, das beim Klick auf "Löschen" abgesendet wird -->
-<form id="deleteForm" method="POST" style="display: none;">
-    <input type="hidden" name="delete_id" id="delete_id">
-</form>
 
 <script src="assets/js/script.js"></script>
 </body>

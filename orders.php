@@ -1,8 +1,9 @@
 <?php
 session_start();
-require_once 'inc/functions.php';
-include_once 'inc/dbverb.php';
+include_once 'inc/dbverb.php'; // DB Verbindung herstellen
+require_once 'inc/functions.php'; // Funktionen einbinden
 
+// Heutige Bestellungen holen mit der FUnktion aus functions.php 
 $result_all_orders = getTodayOrders($conn);
 
 // Variablen für Header.php
@@ -30,11 +31,11 @@ include 'inc/header.php';
                 <th>Bestell-Typ</th>
                 <th>Uhrzeit</th>
             </tr>
-            <!--Jede Bestellung-->
+            <!-- Jede Bestellung -->
             <?php while ($row_all = $result_all_orders->fetch_assoc()): ?>
-                <!--Neue Zeile-->
+                <!-- Neue Zeile -->
                 <tr>
-                    <!--Neue Zelle-->
+                    <!-- Neue Zelle -->
                     <td><?= escape($row_all["BestellungID"]) ?></td>
                     <td><?= escape($row_all["KundeName"]) ?></td>
                     <td><?= escape($row_all["KundeAdresse"]) ?></td>
@@ -54,6 +55,7 @@ include 'inc/header.php';
     </div>
 </main>
 
+<!-- Menü-Popup -->
 <div id="menu-popup" class="menu-popup">
     <div class="menu-popup-content">
         <!--hier wurde statt x &times; verwendet, weil es schöner aussieht-->

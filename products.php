@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'inc/functions.php';
+require_once 'inc/functions.php'; //Funktionen einbinden
 
 //Hinzufügen von Produkten
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -93,6 +93,7 @@ include 'inc/header.php';
 		</div>
 	</div>
 </main>
+
 <!-- Menü-Popup -->
 <div id="menu-popup" class="menu-popup">
 	<div class="menu-popup-content">
